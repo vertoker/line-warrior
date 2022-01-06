@@ -5,18 +5,44 @@ using UnityEngine;
 
 public class CameraFollower : MonoBehaviour
 {
+#if UNITY_EDITOR
+    [SerializeField] private int cameraMoveEventCount = 0;
+#endif
     [SerializeField] private EntityScheduler scheduler;
     [SerializeField] private Transform target;
+
+    public static CameraFollower Instance;
     private Transform _cameraTransform, _player;
-    private Camera _camera;
     private Vector2 _targetWatch;
+    private Camera _camera;
+    private UnityEvent _cameraMoveEvent = new UnityEvent();
 
     [Header("Params")]
     [SerializeField] private float size = 3f;
     [SerializeField] [Range(0f, 1f)] private float f = 0.1f;
 
+
+    public static event UnityAction CameraMoveUpdate
+    {
+        add
+        {
+            Instance._cameraMoveEvent.AddListener(value);
+#if UNITY_EDITOR
+            Instance.cameraMoveEventCount++;
+#endif
+        }
+        remove
+        {
+            Instance._cameraMoveEvent.RemoveListener(value);
+#if UNITY_EDITOR
+            Instance.cameraMoveEventCount--;
+#endif
+        }
+    }
+
     private void Awake()
     {
+        Instance = this;
         _camera = GetComponent<Camera>();
         _cameraTransform = transform;
     }
@@ -34,12 +60,15 @@ public class CameraFollower : MonoBehaviour
         Vector3 nextPosition = Vector3.Lerp(_cameraTransform.position, _targetWatch, f);
         if (_cameraTransform.position != nextPosition) 
         {
-            //_inputController.OnDrag();
+            _cameraMoveEvent.Invoke();
             _cameraTransform.position = nextPosition;
         }
     }
 
-
+    public Vector2 ScreenToWorldPoint(Vector2 screenPosition)
+    {
+        return _camera.ScreenToWorldPoint(screenPosition);
+    }
     private bool TransformInCameraView(Transform target)
     {
         Vector2 cameraPosition = _cameraTransform.position;

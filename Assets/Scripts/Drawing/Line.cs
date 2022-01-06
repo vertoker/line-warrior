@@ -18,13 +18,13 @@ public class Line : MonoBehaviour
         _edgeCollider = GetComponent<EdgeCollider2D>();
     }
 
-    public void DrawPoint(Vector2 position)
+    public void DrawPoint(Vector2 screenPosition, Vector2 worldPosition)
     {
-        _points.Add(position);
+        _points.Add(worldPosition);
         _lineRenderer.positionCount++;
-        _lineRenderer.SetPosition(_counter, position);
+        _lineRenderer.SetPosition(_counter, worldPosition);
         _edgeCollider.SetPoints(_points);
-        _lastPosition = position;
+        _lastPosition = worldPosition;
         _counter++;
     }
 }

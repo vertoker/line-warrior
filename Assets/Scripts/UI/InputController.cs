@@ -17,18 +17,18 @@ public class InputController : MonoBehaviour, IPointerDownHandler, IPointerClick
     public static InputController Instance;
     [SerializeField] private Camera cam;
     [SerializeField] private EventSystem eventSystem;
-    private static UnityEvent<Vector2> _downEvent = new UnityEvent<Vector2>();
-    private static UnityEvent<Vector2> _clickEvent = new UnityEvent<Vector2>();
-    private static UnityEvent<Vector2> _beginDragEvent = new UnityEvent<Vector2>();
-    private static UnityEvent<Vector2> _dragEvent = new UnityEvent<Vector2>();
-    private static UnityEvent<Vector2> _upEvent = new UnityEvent<Vector2>();
+    private static UnityEvent<Vector2, Vector2> _downEvent = new UnityEvent<Vector2, Vector2>();
+    private static UnityEvent<Vector2, Vector2> _clickEvent = new UnityEvent<Vector2, Vector2>();
+    private static UnityEvent<Vector2, Vector2> _beginDragEvent = new UnityEvent<Vector2, Vector2>();
+    private static UnityEvent<Vector2, Vector2> _dragEvent = new UnityEvent<Vector2, Vector2>();
+    private static UnityEvent<Vector2, Vector2> _upEvent = new UnityEvent<Vector2, Vector2>();
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public static event UnityAction<Vector2> DownUpdate
+    public static event UnityAction<Vector2, Vector2> DownUpdate
     {
         add
         {
@@ -45,7 +45,7 @@ public class InputController : MonoBehaviour, IPointerDownHandler, IPointerClick
 #endif
         }
     }
-    public static event UnityAction<Vector2> ClickUpdate
+    public static event UnityAction<Vector2, Vector2> ClickUpdate
     {
         add
         {
@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour, IPointerDownHandler, IPointerClick
 #endif
         }
     }
-    public static event UnityAction<Vector2> BeginDragUpdate
+    public static event UnityAction<Vector2, Vector2> BeginDragUpdate
     {
         add
         {
@@ -79,7 +79,7 @@ public class InputController : MonoBehaviour, IPointerDownHandler, IPointerClick
 #endif
         }
     }
-    public static event UnityAction<Vector2> DragUpdate
+    public static event UnityAction<Vector2, Vector2> DragUpdate
     {
         add
         {
@@ -96,7 +96,7 @@ public class InputController : MonoBehaviour, IPointerDownHandler, IPointerClick
 #endif
         }
     }
-    public static event UnityAction<Vector2> UpUpdate
+    public static event UnityAction<Vector2, Vector2> UpUpdate
     {
         add
         {
@@ -116,22 +116,22 @@ public class InputController : MonoBehaviour, IPointerDownHandler, IPointerClick
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _downEvent.Invoke(cam.ScreenToWorldPoint(eventData.position));
+        _downEvent.Invoke(eventData.position, cam.ScreenToWorldPoint(eventData.position));
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        _clickEvent.Invoke(cam.ScreenToWorldPoint(eventData.position));
+        _clickEvent.Invoke(eventData.position, cam.ScreenToWorldPoint(eventData.position));
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _beginDragEvent.Invoke(cam.ScreenToWorldPoint(eventData.position));
+        _beginDragEvent.Invoke(eventData.position, cam.ScreenToWorldPoint(eventData.position));
     }
     public void OnDrag(PointerEventData eventData)
     {
-        _dragEvent.Invoke(cam.ScreenToWorldPoint(eventData.position));
+        _dragEvent.Invoke(eventData.position, cam.ScreenToWorldPoint(eventData.position));
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        _upEvent.Invoke(cam.ScreenToWorldPoint(eventData.position));
+        _upEvent.Invoke(eventData.position, cam.ScreenToWorldPoint(eventData.position));
     }
 }

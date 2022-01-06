@@ -12,11 +12,11 @@ public class LineEraser : MonoBehaviour
         _poolSpawner = GetComponent<PoolSpawner>();
     }
 
-    public void StartSearchPoints(Vector2 position)
+    public void StartSearchPoints(Vector2 screenPosition, Vector2 worldPosition)
     {
 
     }
-    public void StopSearchPoints(Vector2 position)
+    public void StopSearchPoints(Vector2 screenPosition, Vector2 worldPosition)
     {
 
     }

@@ -12,17 +12,19 @@ public class LineDrawer : MonoBehaviour
     {
         _poolSpawner = GetComponent<PoolSpawner>();
     }
-    public void SpawnLine(Vector2 position)
+    public void SpawnLine(Vector2 screenPosition, Vector2 worldPosition)
     {
         _activeUpdater = _poolSpawner.Dequeue().GetComponent<Line>();
         InputController.DragUpdate += _activeUpdater.DrawPoint;
+        CameraInputUpdater.CameraMoveUpdate += _activeUpdater.DrawPoint;
         beginDrag = true;
     }
-    public void StartDestroyLine(Vector2 position)
+    public void StartDestroyLine(Vector2 screenPosition, Vector2 worldPosition)
     {
         if (beginDrag)
         {
             InputController.DragUpdate -= _activeUpdater.DrawPoint;
+            CameraInputUpdater.CameraMoveUpdate -= _activeUpdater.DrawPoint;
             //StartCoroutine(ExistTimeDuration(_activeUpdater));
             _activeUpdater = null;
             beginDrag = false;
