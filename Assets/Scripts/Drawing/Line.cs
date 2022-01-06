@@ -9,6 +9,7 @@ public class Line : MonoBehaviour
     private LineRenderer _lineRenderer;
     private EdgeCollider2D _edgeCollider;
     private List<Vector2> _points = new List<Vector2>();
+    private Vector2 _lastPosition = Vector2.zero;
     private int _counter = 0;
 
     private void Awake()
@@ -23,6 +24,7 @@ public class Line : MonoBehaviour
         _lineRenderer.positionCount++;
         _lineRenderer.SetPosition(_counter, position);
         _edgeCollider.SetPoints(_points);
+        _lastPosition = position;
         _counter++;
     }
 }

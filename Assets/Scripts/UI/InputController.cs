@@ -12,23 +12,21 @@ public class InputController : MonoBehaviour, IPointerDownHandler, IPointerClick
     [SerializeField] private int beginDragEventCount = 0;
     [SerializeField] private int dragEventCount = 0;
     [SerializeField] private int upEventCount = 0;
-    private static InputController Instance;
 #endif
 
+    public static InputController Instance;
     [SerializeField] private Camera cam;
+    [SerializeField] private EventSystem eventSystem;
     private static UnityEvent<Vector2> _downEvent = new UnityEvent<Vector2>();
     private static UnityEvent<Vector2> _clickEvent = new UnityEvent<Vector2>();
     private static UnityEvent<Vector2> _beginDragEvent = new UnityEvent<Vector2>();
     private static UnityEvent<Vector2> _dragEvent = new UnityEvent<Vector2>();
     private static UnityEvent<Vector2> _upEvent = new UnityEvent<Vector2>();
 
-
-#if UNITY_EDITOR
     private void Awake()
     {
         Instance = this;
     }
-#endif
 
     public static event UnityAction<Vector2> DownUpdate
     {
