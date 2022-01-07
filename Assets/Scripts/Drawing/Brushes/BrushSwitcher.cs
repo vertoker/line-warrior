@@ -6,28 +6,28 @@ public class BrushSwitcher : MonoBehaviour
 {
     private IBrush[] _brushes;
     private IBrush _activeBrush;
-    private int _activeBrushID;
+    [SerializeField] private Transform brushes;
+    [SerializeField] private int activeBrushID;
 
     private void Start()
     {
         _brushes = new IBrush[] 
         {
-            new DrawBrush(gameObject.GetComponent<LineDrawer>()),
-            new EraseBrush(gameObject.GetComponent<LineEraser>())
+            new DrawBrush(brushes.GetComponent<LineDrawer>()),
+            new EraseBrush(brushes.GetComponent<LineEraser>())
         };
-        _activeBrushID = 0;
+        activeBrushID = 0;
         _activeBrush = _brushes[0];
         _activeBrush.EnableBrush();
     }
 
     public void Switch(int ID)
     {
-        if (_activeBrushID == ID)
+        if (activeBrushID == ID)
             return;
         _activeBrush.DisableBrush();
-        _activeBrushID = ID;
+        activeBrushID = ID;
         _activeBrush = _brushes[ID];
         _activeBrush.EnableBrush();
-        print(ID);
     }
 }

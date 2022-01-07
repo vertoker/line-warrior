@@ -13,13 +13,15 @@ public class EraseBrush : IBrush
     public void EnableBrush()
     {
         InputController.DownUpdate += _eraser.StartSearchPoints;
-        InputController.DragUpdate += _eraser.StartSearchPoints;
+        InputController.DragUpdate += _eraser.SearchPoints;
+        InputController.DragUpdate += ErasingExecutor.Execute;
         InputController.UpUpdate += _eraser.StopSearchPoints;
     }
     public void DisableBrush()
     {
         InputController.DownUpdate -= _eraser.StartSearchPoints;
-        InputController.DragUpdate -= _eraser.StartSearchPoints;
+        InputController.DragUpdate -= _eraser.SearchPoints;
+        InputController.DragUpdate -= ErasingExecutor.Execute;
         InputController.UpUpdate -= _eraser.StopSearchPoints;
     }
 }

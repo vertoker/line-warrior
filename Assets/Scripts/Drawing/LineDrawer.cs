@@ -4,39 +4,27 @@ using UnityEngine;
 
 public class LineDrawer : MonoBehaviour
 {
-    private Line _activeUpdater = null;
-    private PoolSpawner _poolSpawner;
+    private Line _activeLine = null;
+    [SerializeField] private PoolSpawner poolSpawner;
     private bool beginDrag = false;
 
-    private void Awake()
-    {
-        _poolSpawner = GetComponent<PoolSpawner>();
-    }
     public void SpawnLine(Vector2 screenPosition, Vector2 worldPosition)
     {
-        _activeUpdater = _poolSpawner.Dequeue().GetComponent<Line>();
-        InputController.DragUpdate += _activeUpdater.DrawPoint;
-        CameraInputUpdater.CameraMoveUpdate += _activeUpdater.DrawPoint;
+        _activeLine = poolSpawner.Dequeue().GetComponent<Line>();
+        _activeLine.SetSpawner(poolSpawner);
+        InputController.DragUpdate += _activeLine.AddPoint;
+        CameraInputUpdater.CameraMoveUpdate += _activeLine.AddPoint;
         beginDrag = true;
     }
     public void StartDestroyLine(Vector2 screenPosition, Vector2 worldPosition)
     {
         if (beginDrag)
         {
-            InputController.DragUpdate -= _activeUpdater.DrawPoint;
-            CameraInputUpdater.CameraMoveUpdate -= _activeUpdater.DrawPoint;
+            InputController.DragUpdate -= _activeLine.AddPoint;
+            CameraInputUpdater.CameraMoveUpdate -= _activeLine.AddPoint;
             //StartCoroutine(ExistTimeDuration(_activeUpdater));
-            _activeUpdater = null;
+            _activeLine = null;
             beginDrag = false;
         }
-    }
-    /*private IEnumerator ExistTimeDuration(Line updater)
-    {
-        yield return new WaitForSeconds(lifetime);
-        DeleteLine(updater);
-    }*/
-    private void DeleteLine(Line updater)
-    {
-        _poolSpawner.Enqueue(updater.gameObject);
     }
 }

@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 6786585746549420546}
   - component: {fileID: 2203112168099629644}
   - component: {fileID: 807214181375549635}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6438566035050429148
 Transform:
   m_ObjectHideFlags: 0
@@ -119,5 +119,5 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
