@@ -18,7 +18,7 @@ public class CameraFollower : MonoBehaviour
     private UnityEvent _cameraMoveEvent = new UnityEvent();
 
     [Header("Params")]
-    [SerializeField] private float size = 3f;
+    //[SerializeField] private float size = 3f;
     [SerializeField] [Range(0f, 1f)] private float f = 0.1f;
 
 
@@ -46,7 +46,7 @@ public class CameraFollower : MonoBehaviour
         _camera = GetComponent<Camera>();
         _cameraTransform = transform;
     }
-    private void Start()
+    private void OnEnable()
     {
         _player = scheduler.Player.transform;
     }

@@ -10,11 +10,20 @@ public class AnimationExecutor : MonoBehaviour
     private static int _animationsCount = 0;
     private static int _globalCounter = 0;
     private static float _timer = 0f;
+    private static bool _pause = true;
 
     private static event UnityAction<int> AnimationUpdate
     {
         add => _animationUpdateEvent.AddListener(value);
         remove => _animationUpdateEvent.RemoveListener(value);
+    }
+    private void OnEnable()
+    {
+        _pause = false;
+    }
+    private void OnDisable()
+    {
+        _pause = true;
     }
 
     public static void Add(IAnimation animation)
@@ -30,9 +39,20 @@ public class AnimationExecutor : MonoBehaviour
         _animations.Remove(animation);
         _animationsCount--;
     }
+    public static void RemoveAll()
+    {
+        for (int i = 0; i < _animationsCount; i++)
+        {
+            AnimationUpdate -= _animations[i].UpdateAnimation;
+        }
+        _animations.RemoveRange(0, _animationsCount);
+        _animationsCount = 0;
+    }
 
     private void Update()
     {
+        if (_pause)
+            return;
         _timer += Time.deltaTime;
         int localCounter = (int)(_timer * AnimationBehaviour.FRAMERATE);
         if (localCounter > _globalCounter)

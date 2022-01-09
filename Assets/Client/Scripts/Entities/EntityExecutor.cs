@@ -12,6 +12,16 @@ public class EntityExecutor : MonoBehaviour
 
     private UnityEvent _moveEvent = new UnityEvent();
     private UnityEvent _attackEvent = new UnityEvent();
+    private static bool _pause = true;
+
+    private void OnEnable()
+    {
+        _pause = false;
+    }
+    private void OnDisable()
+    {
+        _pause = true;
+    }
 
     public event UnityAction MoveUpdate
     {
@@ -50,6 +60,8 @@ public class EntityExecutor : MonoBehaviour
 
     private void Update()
     {
+        if (_pause)
+            return;
         _moveEvent.Invoke();
         _attackEvent.Invoke();
     }
