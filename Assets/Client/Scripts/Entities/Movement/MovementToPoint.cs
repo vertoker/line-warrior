@@ -8,10 +8,10 @@ public class MovementToPoint : IMovement
     private Transform _origin;
     private AIRandomCircleSetter _setter;
 
-    public MovementToPoint(Transform origin, AIRandomCircleSetter setter)
+    public MovementToPoint(Transform origin)
     {
         _origin = origin;
-        _setter = setter;
+        _setter = origin.GetComponent<AIRandomCircleSetter>();
     }
 
     public void Move()

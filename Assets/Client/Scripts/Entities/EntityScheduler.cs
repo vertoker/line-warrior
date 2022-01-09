@@ -5,8 +5,8 @@ using Pathfinding;
 
 public class EntityScheduler : MonoBehaviour
 {
-    private IMovement _movementPlayer;
     [SerializeField] private GameObject playerOrigin;
+    [SerializeField] private Animation playerAnimation;
     private EntityExecutor _executor;
     private Transform _parent;
 
@@ -20,9 +20,11 @@ public class EntityScheduler : MonoBehaviour
         _executor = GetComponent<EntityExecutor>();
 
         Player = Instantiate(playerOrigin, _parent);
-        _movementPlayer = new MovementToPoint(Player.transform, Player.GetComponent<AIRandomCircleSetter>());
-        Entity playerEntity = new Entity(_movementPlayer);
+        IMovement _movementPlayer = new MovementToPoint(Player.transform);
+        IAnimation _animationPlayer = new PlayerAnimation(Player.transform, playerAnimation);
+        Entity playerEntity = new Entity(_movementPlayer, _animationPlayer);
         EnableEntity(playerEntity);
+        AnimationExecutor.Add(_animationPlayer);
     }
 
     public void EnableEntity(Entity entity)
