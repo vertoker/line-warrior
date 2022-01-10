@@ -25,13 +25,14 @@ public class Entity
         }
     }
 
-    public Entity(int health, IMovement movement, IAnimation animation, IAttack attack, IDeath death)
+    public Entity(int health, IMovement movement, IAnimation animation, IAttack attack, IDeath death, HealthTransfer transfer)
     {
         _health = _maxHealth = health;
         _movement = movement;
         _animation = animation;
         _attack = attack;
         _death = death;
+        transfer.SetTransfer(this);
     }
 
     public void Damage(int damage)
@@ -42,5 +43,6 @@ public class Entity
             _health = 0;
             _death.Death();
         }
+        Debug.Log(_health);
     }
 }

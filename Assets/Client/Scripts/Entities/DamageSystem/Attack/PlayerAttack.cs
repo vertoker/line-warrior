@@ -29,10 +29,10 @@ public class PlayerAttack : IAttack
     }
     public void StartAttack(Transform transform)
     {
-
+        _activeWeapon.StartAttack();
     }
     public void StopAttack()
     {
-
+        _activeWeapon.StopAttack();
     }
 }

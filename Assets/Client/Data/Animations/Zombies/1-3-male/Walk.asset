@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d682a3c188997184eb47cd3258ecab29, type: 3}
+  m_Name: Walk
+  m_EditorClassIdentifier: 
+  _sprites:
+  - {fileID: 21300000, guid: f8b0d100fea234149a4e46d3d8e5d3c2, type: 3}
+  - {fileID: 21300000, guid: e3db0fea4d420a845b5ac448318d1055, type: 3}
+  - {fileID: 21300000, guid: 529d85560021a9b47ae0f74eedc5153f, type: 3}
+  - {fileID: 21300000, guid: f8e2cd391c0138945946b8ef6a5d3964, type: 3}
+  - {fileID: 21300000, guid: 7d7b7ed3c06763546be686b498cbdfbb, type: 3}
+  - {fileID: 21300000, guid: 004c0d788d0bb644cbe3181d6cba77aa, type: 3}
+  - {fileID: 21300000, guid: c4d67efe3b1696e4cb63d1d5a0aee370, type: 3}
+  - {fileID: 21300000, guid: 3bcbff5dbbfcf054ab28f385931453b8, type: 3}
+  - {fileID: 21300000, guid: f4ad228fdda6ab742a2cf978c9fcc841, type: 3}
+  _frameLength: 3

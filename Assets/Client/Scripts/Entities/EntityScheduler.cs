@@ -24,13 +24,14 @@ public class EntityScheduler : MonoBehaviour
     private void OnEnable()
     {
         Player = Instantiate(playerOrigin, _parent);
-        IMovement _movementPlayer = new MovementToPoint(Player.transform);
-        IAnimation _animationPlayer = new PlayerAnimation(Player.transform, playerAnimation);
-        IAttack _attackPlayer = new PlayerAttack(Player.transform, Player.transform.GetChild(1), projectiles);
-        IDeath _deathPlayer = GameLoop.Instance;
-        Entity playerEntity = new Entity(1000, _movementPlayer, _animationPlayer, _attackPlayer, _deathPlayer);
+        IMovement movementPlayer = new MovementToPoint(Player.transform);
+        IAnimation animationPlayer = new PlayerAnimation(Player.transform, playerAnimation);
+        IAttack attackPlayer = new PlayerAttack(Player.transform, Player.transform.GetChild(2), projectiles);
+        IDeath deathPlayer = GameLoop.Instance;
+        HealthTransfer transfer = Player.GetComponent<HealthTransfer>();
+        Entity playerEntity = new Entity(1000, movementPlayer, animationPlayer, attackPlayer, deathPlayer, transfer);
         EnableEntity(playerEntity);
-        AnimationExecutor.Add(_animationPlayer);
+        AnimationExecutor.Add(animationPlayer);
     }
     private void OnDisable()
     {

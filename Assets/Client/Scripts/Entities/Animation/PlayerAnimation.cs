@@ -6,16 +6,16 @@ using Pathfinding;
 public class PlayerAnimation : AnimationBehaviour, IAnimation
 {
     private SpriteRenderer _legs;
-    private Transform _legsTransform;
+    private Transform _bodyTransform;
     private EntityObjectRegistrator _registrator;
     private AIPath _aipath;
 
     public PlayerAnimation(Transform origin, Animation animation)
     {
-        _legsTransform = origin.GetChild(0);
+        _bodyTransform = origin.GetChild(0);
         _aipath = origin.GetComponent<AIPath>();
         _registrator = origin.GetComponent<EntityObjectRegistrator>();
-        _legs = _legsTransform.GetComponent<SpriteRenderer>();
+        _legs = origin.GetChild(1).GetComponent<SpriteRenderer>();
         BaseInit(origin, animation);
     }
 
@@ -28,12 +28,10 @@ public class PlayerAnimation : AnimationBehaviour, IAnimation
         if (_registrator.IsMove)
         {
             _legs.sprite = _animation.GetSprite(counter, _startCounter);
-            _legsTransform.eulerAngles = _aipath.rotation.eulerAngles;
         }
         else
         {
             _legs.sprite = null;
-            _legsTransform.eulerAngles = Vector3.zero;
         }
     }
 }

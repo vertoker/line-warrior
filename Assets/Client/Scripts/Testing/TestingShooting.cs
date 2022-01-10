@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class TestingShooting : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Camera _camera;
+    [SerializeField] private EntityScheduler _scheduler;
+    private MachineGunWeapon machineGun;
+
+
+    private void Start()
     {
-        
+        machineGun = _scheduler.Player.transform.GetChild(2).GetComponent<MachineGunWeapon>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Vector2 position = _camera.ScreenToWorldPoint(Input.mousePosition);
+        machineGun.LookAt(position);
+        if (Input.GetMouseButtonDown(1))
+        {
+            machineGun.StartAttack();
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            machineGun.StopAttack();
+        }
     }
 }
