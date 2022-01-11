@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 813263007928417919}
   - component: {fileID: 813263007928417916}
   - component: {fileID: 3569719118520432239}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,6 +199,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _distanceRaycast: 50
+  _timeUpdateClosestEntity: 0.5
+  _speedRotateLook: 10
+  _body: {fileID: 813263008175551756}
+  _angleTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &813263008008136393
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 813263008008136392}
   - component: {fileID: 813263008008136395}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,9 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73450755467a12e4fbc509cee46a2411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletTemp: 0.25
+  _bulletTemp: 0.125
   _timeToDelete: 3
-  _body: {fileID: 813263008175551756}
+  _velocity: 20
   _pointSpawn: {fileID: 813263008848408937}
 --- !u!1 &813263008175551757
 GameObject:
@@ -256,7 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 813263008175551756}
   - component: {fileID: 813263008175551759}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 813263008325020080}
   - component: {fileID: 813263008325020083}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813263008848408937}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: PointSpawnBullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}

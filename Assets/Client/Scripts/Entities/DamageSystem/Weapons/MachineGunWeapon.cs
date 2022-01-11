@@ -7,12 +7,36 @@ public class MachineGunWeapon : MonoBehaviour, IWeapon, IPoolSpawnerRequest
 {
     [SerializeField] private float _bulletTemp = 0.25f;
     [SerializeField] private float _timeToDelete = 3f;
-    [SerializeField] private Transform _body, _pointSpawn;
+    [SerializeField] private float _velocity = 50f;
+    [SerializeField] private Transform _pointSpawn;
     private PoolSpawner _spawnerBullets;
-    private List<Coroutine> _bullets = new List<Coroutine>();
     private Coroutine _shootUpdate;
     private Vector2 _target = Vector2.zero;
     private Vector3 _angle = Vector3.zero;
+
+    private void OnEnable()
+    {
+        PlayerAttackAim.AngleAction += UpdateAngle;
+    }
+    private void OnDisable()
+    {
+        PlayerAttackAim.AngleAction -= UpdateAngle;
+    }
+    private void UpdateAngle(float angle, Vector2 direction)
+    {
+        _angle = new Vector3(0, 0, angle);
+        _target = direction * _velocity;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(TestWait());
+    }
+    private IEnumerator TestWait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        StartAttack();
+    }
 
     public void Enabled(bool enabled)
     {
@@ -25,11 +49,6 @@ public class MachineGunWeapon : MonoBehaviour, IWeapon, IPoolSpawnerRequest
     public void StopAttack()
     {
         StopCoroutine(_shootUpdate);
-    }
-    public void LookAt(Vector3 target)
-    {
-        _target = (target - _body.position).normalized * 50f;
-        _body.eulerAngles = _angle = new Vector3(0, 0, Mathf.Atan2(_target.y, _target.x) * Mathf.Rad2Deg + 90f);
     }
     public void SetPoolSpawner(PoolSpawner spawner)
     {

@@ -19,6 +19,7 @@ public class PlayerAttack : IAttack
         };
         for (int i = 0; i < _weapons.Length; i++)
             ((IPoolSpawnerRequest)_weapons[i]).SetPoolSpawner(projectiles.GetChild(i).GetComponent<PoolSpawner>());
+        Switch(0);
     }
 
     public void Switch(int id)
@@ -27,7 +28,7 @@ public class PlayerAttack : IAttack
         _activeWeapon = _weapons[id];
         _activeWeapon.Enabled(true);
     }
-    public void StartAttack(Transform transform)
+    public void StartAttack()
     {
         _activeWeapon.StartAttack();
     }

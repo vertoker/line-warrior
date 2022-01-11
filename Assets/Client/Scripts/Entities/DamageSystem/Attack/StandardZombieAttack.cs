@@ -18,7 +18,7 @@ public class StandardZombieAttack : IAttack
     {
 
     }
-    public void StartAttack(Transform transform)
+    public void StartAttack()
     {
         _fists.StartAttack();
     }

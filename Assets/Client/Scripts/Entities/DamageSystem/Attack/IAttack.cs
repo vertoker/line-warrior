@@ -5,6 +5,6 @@ using UnityEngine;
 public interface IAttack
 {
     public void Switch(int id);
-    public void StartAttack(Transform transform);
+    public void StartAttack();
     public void StopAttack();
 }
