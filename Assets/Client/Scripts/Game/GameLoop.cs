@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameLoop : MonoBehaviour, IDeath
+public class GameLoop : MonoBehaviour
 {
     [SerializeField] private MonoBehaviour[] components;
     private SceneSwitcher _sceneSwitcher;
-    public static GameLoop Instance;
+    public static Death DeathPlayer;
 
     private void Start()
     {
-        Instance = this;
+        DeathPlayer = Death;
         _sceneSwitcher = GetComponent<SceneSwitcher>();
         StartGame();
     }
@@ -19,7 +19,7 @@ public class GameLoop : MonoBehaviour, IDeath
         StopAllCoroutines();
     }
 
-    public void Death()
+    public void Death(Entity entity)
     {
         StopGame();
     }

@@ -18,9 +18,4 @@ public class EnemySpawnField : MonoBehaviour
             offset = offset.normalized * Random.Range(_playerDistanceSpawn, _playerDistanceSpawn * 2);
         return _target.position + offset;
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawCube(_target.position, _borderCorner * 2);
-    }
 }

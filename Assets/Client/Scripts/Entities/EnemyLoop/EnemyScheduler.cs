@@ -12,6 +12,10 @@ public class EnemyScheduler : MonoBehaviour
 
     private void Awake()
     {
+        _standardZombies.Init();
+        _bigZombies.Init();
+        _smallBossZombies.Init();
+        _bigBossZombies.Init();
         _converterPresets = new Dictionary<EnemyType, IEnemyCreator>()
         {
             { EnemyType.None, null },
@@ -46,6 +50,7 @@ public enum EnemyType
 }
 public interface IEnemyCreator
 {
+    public void Init();
     public Entity CreateEntity(EnemyType type, Vector3 position);
 }
 
@@ -55,13 +60,49 @@ public interface IEnemyCreator
 [System.Serializable]
 public class StandardZombiesCreator : IEnemyCreator
 {
-    [SerializeField] private Animation tier1_Female1, tier1_Female2;
-    [SerializeField] private Animation tier1_Male1, tier1_Male2;
-    [SerializeField] private Animation tier2_Army, tier2_Cop;
+    [System.Serializable]
+    private class AnimationCollection
+    {
+        [SerializeField] private Animation _walk, _attack, _death;
+
+        public Animation Walk { get { return _walk; } }
+        public Animation Attack { get { return _attack; } }
+        public Animation Death { get { return _death; } }
+    }
+
+    [SerializeField] private Transform _parent;
+    [SerializeField] private GameObject tier1_instance;
+    [SerializeField] private AnimationCollection tier1_Female1, tier1_Female2;
+    [SerializeField] private AnimationCollection tier1_Male1, tier1_Male2;
+    [SerializeField] private AnimationCollection tier2_Army, tier2_Cop;
+
+    private Dictionary<EnemyType, AnimationCollection> _converter;
+
+    public void Init()
+    {
+        _converter = new Dictionary<EnemyType, AnimationCollection>()
+        {
+            { EnemyType.Tier1_Female1, tier1_Female1 },
+            { EnemyType.Tier1_Female2, tier1_Female2 },
+            { EnemyType.Tier1_Male1, tier1_Male1 },
+            { EnemyType.Tier1_Male2, tier1_Male2 },
+            { EnemyType.Tier2_Army, tier2_Army },
+            { EnemyType.Tier2_Cop, tier2_Cop }
+        };
+    }
 
     public Entity CreateEntity(EnemyType type, Vector3 position)
     {
-
+        GameObject enemy = Object.Instantiate(tier1_instance, _parent);
+        enemy.transform.position = position;
+        IMovement movementEnemy = new MovementToTarget(enemy.transform, EntityScheduler.Player.transform);
+        AnimationCollection anims = _converter[type];
+        IAnimation animationEnemy = new StandardZombieAnimation(enemy.transform, anims.Walk, anims.Attack, anims.Death);
+        IAttack attackEnemy = new StandardZombieAttack(enemy.transform, enemy.transform.GetChild(0));
+        Death deathEnemy = EnemySpawner.EnemyDeath;//Поменять
+        HealthTransfer transfer = enemy.GetComponent<HealthTransfer>();
+        Entity playerEntity = new Entity(100, movementEnemy, animationEnemy, attackEnemy, deathEnemy, transfer, enemy);
+        return playerEntity;
     }
 }
 /// <summary>
@@ -72,9 +113,20 @@ public class BigZombiesCreator : IEnemyCreator
 {
     [SerializeField] private Animation tier3_BigHands, tier3_BigHead;
 
+    private Dictionary<EnemyType, Animation> _converter;
+
+    public void Init()
+    {
+        _converter = new Dictionary<EnemyType, Animation>()
+        {
+            { EnemyType.Tier3_BigHands, tier3_BigHands },
+            { EnemyType.Tier3_BigHead, tier3_BigHead }
+        };
+    }
+
     public Entity CreateEntity(EnemyType type, Vector3 position)
     {
-
+        return null;
     }
 }
 /// <summary>
@@ -85,9 +137,20 @@ public class SmallBossZombiesCreator : IEnemyCreator
 {
     [SerializeField] private Animation tier4_Boss1, tier4_Boss2;
 
+    private Dictionary<EnemyType, Animation> _converter;
+
+    public void Init()
+    {
+        _converter = new Dictionary<EnemyType, Animation>()
+        {
+            { EnemyType.Tier4_Boss1, tier4_Boss1 },
+            { EnemyType.Tier4_Boss2, tier4_Boss2 }
+        };
+    }
+
     public Entity CreateEntity(EnemyType type, Vector3 position)
     {
-
+        return null;
     }
 }
 /// <summary>
@@ -98,8 +161,13 @@ public class BigBossZombiesCreator : IEnemyCreator
 {
     [SerializeField] private Animation tier5_MainBoss;
 
-    public Entity CreateEntity(EnemyType type, Vector3 position)
+    public void Init()
     {
 
+    }
+
+    public Entity CreateEntity(EnemyType type, Vector3 position)
+    {
+        return null;
     }
 }

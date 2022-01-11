@@ -5,13 +5,12 @@ using UnityEngine;
 public class TestingShooting : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    [SerializeField] private EntityScheduler _scheduler;
     private MachineGunWeapon machineGun;
 
 
     private void Start()
     {
-        machineGun = _scheduler.Player.transform.GetChild(2).GetComponent<MachineGunWeapon>();
+        machineGun = EntityScheduler.Player.transform.GetChild(2).GetComponent<MachineGunWeapon>();
     }
 
     private void Update()

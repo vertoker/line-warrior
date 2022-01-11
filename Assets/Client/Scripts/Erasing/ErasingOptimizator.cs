@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ErasingOptimizator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.TryGetComponent(out HealthTransfer entity))
+        {
+            entity.Erase();
+        }
     }
 }

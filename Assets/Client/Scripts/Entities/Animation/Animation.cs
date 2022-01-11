@@ -13,4 +13,6 @@ public class Animation : ScriptableObject
         int offsetCounter = (counter - startCounter) / _frameLength;
         return _sprites[offsetCounter % _sprites.Length];
     }
+
+    public const int FRAMERATE = 60;
 }

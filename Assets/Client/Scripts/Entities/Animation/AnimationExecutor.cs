@@ -54,7 +54,7 @@ public class AnimationExecutor : MonoBehaviour
         if (_pause)
             return;
         _timer += Time.deltaTime;
-        int localCounter = (int)(_timer * AnimationBehaviour.FRAMERATE);
+        int localCounter = (int)(_timer * Animation.FRAMERATE);
         if (localCounter > _globalCounter)
         {
             _globalCounter = localCounter;

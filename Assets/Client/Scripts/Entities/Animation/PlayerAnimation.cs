@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class PlayerAnimation : AnimationBehaviour, IAnimation
+public class PlayerAnimation : IAnimation
 {
-    private SpriteRenderer _legs;
-    private Transform _bodyTransform;
     private EntityObjectRegistrator _registrator;
-    private AIPath _aipath;
+    private SpriteRenderer _body, _legs;
+    private Transform _bodyTransform;
+    private Animation _legsAnim;
+    private int _startCounter;
 
-    public PlayerAnimation(Transform origin, Animation animation)
+    public PlayerAnimation(Transform origin, Animation legsAnim)
     {
         _bodyTransform = origin.GetChild(0);
-        _aipath = origin.GetComponent<AIPath>();
         _registrator = origin.GetComponent<EntityObjectRegistrator>();
+        _body = _bodyTransform.GetComponent<SpriteRenderer>();
         _legs = origin.GetChild(1).GetComponent<SpriteRenderer>();
-        BaseInit(origin, animation);
+        _legsAnim = legsAnim;
     }
 
     public void InitAnimation(int counter)
@@ -27,11 +28,15 @@ public class PlayerAnimation : AnimationBehaviour, IAnimation
     {
         if (_registrator.IsMove)
         {
-            _legs.sprite = _animation.GetSprite(counter, _startCounter);
+            _legs.sprite = _legsAnim.GetSprite(counter, _startCounter);
         }
         else
         {
             _legs.sprite = null;
         }
+    }
+    public void Death()
+    {
+
     }
 }

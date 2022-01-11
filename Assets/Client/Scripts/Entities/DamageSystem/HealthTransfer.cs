@@ -14,4 +14,8 @@ public class HealthTransfer : MonoBehaviour
     {
         _entity.Damage(damage);
     }
+    public void Erase()
+    {
+        _entity.Death();
+    }
 }

@@ -17,6 +17,8 @@ public class EnemySpawnerSettings
     public void Set(float progress, EnemySpawnerSettingsPreset start, EnemySpawnerSettingsPreset end)
     {
         _durationSpawn = start.DurationSpawn + (end.DurationSpawn - start.DurationSpawn) * progress;
+        //Debug.Log(string.Join(" ", start.DurationSpawn, end.DurationSpawn, _durationSpawn));
+        //Debug.Log(start.DurationSpawn + (end.DurationSpawn - start.DurationSpawn) * progress);
         int count = start.VariantsCount;
 
         float[] chancesStart = start.Chances;

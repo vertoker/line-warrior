@@ -467,7 +467,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMoveEventCount: 0
-  scheduler: {fileID: 580773097}
   f: 0.15
 --- !u!20 &519420031
 Camera:
@@ -524,6 +523,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 618284865}
+  - {fileID: 1471131522}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -540,6 +540,7 @@ GameObject:
   - component: {fileID: 580773099}
   - component: {fileID: 580773095}
   - component: {fileID: 580773098}
+  - component: {fileID: 580773100}
   m_Layer: 0
   m_Name: Entities
   m_TagString: Untagged
@@ -603,6 +604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577b61bfb34e8c746936a93f0139a38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxEntities: 30
+  _settingsStart: {fileID: 11400000, guid: a9f7254db138ed4438569540b2c40c09, type: 2}
+  _settingsEnd: {fileID: 11400000, guid: 94a6eb922d68a0e4c854af08cbca053c, type: 2}
 --- !u!114 &580773099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,6 +619,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d041f71c3b1bacc46884ef42a28adfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _standardZombies:
+    _parent: {fileID: 580773096}
+    tier1_instance: {fileID: 2473970148739565301, guid: c23b8b253e4a54f46866746ac39c79cf, type: 3}
+    tier1_Female1:
+      _walk: {fileID: 11400000, guid: bd4342d207ce3e340b833afe10db67db, type: 2}
+      _attack: {fileID: 11400000, guid: 59d31cb64dfaffe42a42eec5e2f22dd4, type: 2}
+      _death: {fileID: 11400000, guid: af1702485888a8c42baf4f922de15388, type: 2}
+    tier1_Female2:
+      _walk: {fileID: 11400000, guid: c25635185eb4e974da6db4de68993cf4, type: 2}
+      _attack: {fileID: 11400000, guid: 9e49c8b93a3b4ff459b34bb60a8869d9, type: 2}
+      _death: {fileID: 11400000, guid: a8d2df725fc5cc441a6f8bda9331bd12, type: 2}
+    tier1_Male1:
+      _walk: {fileID: 11400000, guid: 10ba02455f5f5854c93eaf36116e8b35, type: 2}
+      _attack: {fileID: 11400000, guid: c92d106c2750b064088b1bd777ff9001, type: 2}
+      _death: {fileID: 11400000, guid: 87b382327463f5a4c9a3b8583f42fefe, type: 2}
+    tier1_Male2:
+      _walk: {fileID: 11400000, guid: 1b37ec7f0a13e2a46aa18ec454afed08, type: 2}
+      _attack: {fileID: 11400000, guid: dd6f778ddc7a4f84e9e6acf162a6fe83, type: 2}
+      _death: {fileID: 11400000, guid: 627f8531bee6b9445a364c3b676c53b4, type: 2}
+    tier2_Army:
+      _walk: {fileID: 11400000, guid: 9d2c58a50c014bd4ab7e424344a2ed43, type: 2}
+      _attack: {fileID: 11400000, guid: e955ffbbb3fc7f04fbc8c9d4f328b5d1, type: 2}
+      _death: {fileID: 11400000, guid: 2095b1654c9d8854a950fc9ac4f0723a, type: 2}
+    tier2_Cop:
+      _walk: {fileID: 11400000, guid: 5ab75d986fa5a064f94e95d481ac9906, type: 2}
+      _attack: {fileID: 11400000, guid: ccec8ad55b47029448eda74e6ae47cda, type: 2}
+      _death: {fileID: 11400000, guid: 01347299a2a371346a0069a613949569, type: 2}
+  _bigZombies:
+    tier3_BigHands: {fileID: 0}
+    tier3_BigHead: {fileID: 0}
+  _smallBossZombies:
+    tier4_Boss1: {fileID: 0}
+    tier4_Boss2: {fileID: 0}
+  _bigBossZombies:
+    tier5_MainBoss: {fileID: 0}
+--- !u!114 &580773100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580773094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f58a87c928c0e4eba484efa370e26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 519420031}
+  _target: {fileID: 519420032}
+  _borderCorner: {x: 25, y: 12.5}
+  _playerDistanceSpawn: 2
 --- !u!1 &618284864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
-  _scheduler: {fileID: 580773097}
 --- !u!4 &880207248
 Transform:
   m_ObjectHideFlags: 0
@@ -1535,6 +1589,98 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSpawner: {fileID: 1646745424}
+--- !u!1 &1471131521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471131522}
+  - component: {fileID: 1471131524}
+  - component: {fileID: 1471131523}
+  - component: {fileID: 1471131525}
+  m_Layer: 0
+  m_Name: TriggerOptimizator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1471131522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471131521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1471131523
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471131521}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 50, y: 25}
+  m_EdgeRadius: 0
+--- !u!114 &1471131524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471131521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db13eaff100e17847aaf01d0990afd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &1471131525
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471131521}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1646745421
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,4 +15,9 @@ public interface IAnimation
     /// </summary>
     /// <param name="counter"></param>
     public void UpdateAnimation(int counter);
+
+    /// <summary>
+    /// Activate death animation
+    /// </summary>
+    public void Death();
 }

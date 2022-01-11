@@ -8,7 +8,6 @@ public class CameraFollower : MonoBehaviour
 #if UNITY_EDITOR
     [SerializeField] private int cameraMoveEventCount = 0;
 #endif
-    [SerializeField] private EntityScheduler scheduler;
     //[SerializeField] private Transform target;
 
     public static CameraFollower Instance;
@@ -48,7 +47,7 @@ public class CameraFollower : MonoBehaviour
     }
     private void OnEnable()
     {
-        _player = scheduler.Player.transform;
+        _player = EntityScheduler.Player.transform;
     }
     private void Update()
     {

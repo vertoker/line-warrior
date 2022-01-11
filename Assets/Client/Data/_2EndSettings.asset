@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: _2EndSettings
   m_EditorClassIdentifier: 
   _durationSpawn: 0.1
-  _changes: []
-  _results: 
-  _fullChance: 0
+  _changes:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  _results: 000000000100000002000000030000000400000005000000
+  _fullChance: 100
