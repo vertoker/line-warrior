@@ -11,7 +11,7 @@ public class StandardZombieAttack : IAttack
     public StandardZombieAttack(Transform enemy, Transform weapon)
     {
         _enemy = enemy;
-        _fists = weapon.GetComponent<MachineGunWeapon>();
+        _fists = weapon.GetComponent<FistsWeapon>();
     }
 
     public void Switch(int id)

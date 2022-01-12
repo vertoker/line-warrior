@@ -6,7 +6,7 @@ public class EntityObjectRegistrator : MonoBehaviour
 {
     private Vector3 _lastPosition;
     private Transform _tr;
-    private bool _isMove;
+    private float _moveSpeed;
 
     private void Awake()
     {
@@ -14,9 +14,10 @@ public class EntityObjectRegistrator : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _isMove = Vector3.Distance(_tr.position, _lastPosition) != 0f;
+        _moveSpeed = Vector3.Distance(_tr.position, _lastPosition);
         _lastPosition = _tr.position;
     }
 
-    public bool IsMove { get { return _isMove; } }
+    public bool IsMove { get { return _moveSpeed != 0f; } }
+    public bool IsSlowMove { get { return _moveSpeed > 0.005f; } }
 }

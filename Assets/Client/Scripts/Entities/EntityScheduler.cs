@@ -6,6 +6,7 @@ using Pathfinding;
 public class EntityScheduler : MonoBehaviour
 {
     [SerializeField] private GameObject playerOrigin;
+    [SerializeField] private PlayerHealthBar playerHealthBar;
     [SerializeField] private Transform projectiles;
     [SerializeField] private Animation playerAnimation;
     private static EntityExecutor _executor;
@@ -33,6 +34,7 @@ public class EntityScheduler : MonoBehaviour
         IAttack attackPlayer = new PlayerAttack(Player.transform, Player.transform.GetChild(2), projectiles);
         Death deathPlayer = GameLoop.DeathPlayer;
         HealthTransfer transfer = Player.GetComponent<HealthTransfer>();
+        playerHealthBar.SetTransfer(transfer);
         Entity playerEntity = new Entity(1000, movementPlayer, animationPlayer, attackPlayer, deathPlayer, transfer, Player);
         EnableEntity(playerEntity);
         AnimationExecutor.Add(animationPlayer);

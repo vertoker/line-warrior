@@ -188,7 +188,6 @@ MonoBehaviour:
   _seed: 1337
   _sizeViewWidth: 21
   _sizeViewHeight: 21
-  _camera: {fileID: 519420031}
   _blocks: {fileID: 11400000, guid: 283cc42871953d64e8a9e76b5653804e, type: 2}
   _tilemap: {fileID: 715464004}
 --- !u!156049354 &397227527
@@ -542,6 +541,7 @@ GameObject:
   - component: {fileID: 580773095}
   - component: {fileID: 580773098}
   - component: {fileID: 580773100}
+  - component: {fileID: 580773101}
   m_Layer: 0
   m_Name: Entities
   m_TagString: Untagged
@@ -590,6 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerOrigin: {fileID: 813263007928417917, guid: 19267745a9159a8438ffad4aaa38695d, type: 3}
+  playerHealthBar: {fileID: 886088175}
   projectiles: {fileID: 147423917}
   playerAnimation: {fileID: 11400000, guid: 86403ceb1acd2164d9972134761dd848, type: 2}
   _player: {fileID: 0}
@@ -622,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _standardZombies:
     _parent: {fileID: 580773096}
-    tier1_instance: {fileID: 2473970148739565301, guid: c23b8b253e4a54f46866746ac39c79cf, type: 3}
+    tier1_instance: {fileID: 243427349216272158, guid: c23b8b253e4a54f46866746ac39c79cf, type: 3}
     tier1_Female1:
       _walk: {fileID: 11400000, guid: bd4342d207ce3e340b833afe10db67db, type: 2}
       _attack: {fileID: 11400000, guid: 59d31cb64dfaffe42a42eec5e2f22dd4, type: 2}
@@ -671,6 +672,19 @@ MonoBehaviour:
   _target: {fileID: 519420032}
   _borderCorner: {x: 25, y: 12.5}
   _playerDistanceSpawn: 2
+--- !u!114 &580773101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580773094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af877a333035934188e575c03c4ee24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stabilizeEventCount: 0
 --- !u!1 &618284864
 GameObject:
   m_ObjectHideFlags: 0

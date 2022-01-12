@@ -97,8 +97,8 @@ public class StandardZombiesCreator : IEnemyCreator
         enemy.transform.position = position;
         IMovement movementEnemy = new MovementToTarget(enemy.transform, EntityScheduler.Player.transform);
         AnimationCollection anims = _converter[type];
-        IAnimation animationEnemy = new StandardZombieAnimation(enemy.transform, anims.Walk, anims.Attack, anims.Death);
         IAttack attackEnemy = new StandardZombieAttack(enemy.transform, enemy.transform.GetChild(0));
+        IAnimation animationEnemy = new StandardZombieAnimation(enemy.transform, anims.Walk, anims.Attack, anims.Death, attackEnemy);
         Death deathEnemy = EnemySpawner.EnemyDeath;//Поменять
         HealthTransfer transfer = enemy.GetComponent<HealthTransfer>();
         Entity playerEntity = new Entity(100, movementEnemy, animationEnemy, attackEnemy, deathEnemy, transfer, enemy);

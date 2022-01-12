@@ -10,7 +10,8 @@ public class Entity
     private IAttack _attack;
     private Death _death;
 
-    private int _health, _maxHealth;
+    private int _health;
+    private float _maxHealth;
     private GameObject _obj;
     private UnityEvent<float> _healthProgressEvent = new UnityEvent<float>();
 
@@ -44,7 +45,8 @@ public class Entity
 
     public Entity(int health, IMovement movement, IAnimation animation, IAttack attack, Death death, HealthTransfer transfer, GameObject obj)
     {
-        _health = _maxHealth = health;
+        _health = health;
+        _maxHealth = health;
         _movement = movement;
         _animation = animation;
         _attack = attack;
@@ -61,6 +63,7 @@ public class Entity
             _health = 0;
             Death();
         }
+        _healthProgressEvent.Invoke(_health / _maxHealth);
         //Debug.Log(_health);
     }
     public void Death() 
