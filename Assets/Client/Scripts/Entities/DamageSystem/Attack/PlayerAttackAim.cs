@@ -54,7 +54,6 @@ public class PlayerAttackAim : MonoBehaviour
         Vector2 targetAngle = _parent.GetChild(ID).position - _body.position;
         float angle = Mathf.Atan2(targetAngle.y, targetAngle.x) * Mathf.Rad2Deg + 90f;
         _angleTarget = new Vector3(0, 0, angle);
-        _angleEvent.Invoke(angle, targetAngle);
 
         yield return new WaitForSeconds(_timeUpdateClosestEntity);
         _updateClosestEntity = StartCoroutine(ClosestEntity());
@@ -62,5 +61,9 @@ public class PlayerAttackAim : MonoBehaviour
     public void Update()
     {
         _body.rotation = Quaternion.RotateTowards(_body.rotation, Quaternion.Euler(_angleTarget), _speedRotateLook);
+        float angle = _body.eulerAngles.z - 180f;
+        float angleVector = (angle + 90f) * Mathf.Deg2Rad;
+        Vector2 targetAngle = new Vector2(Mathf.Cos(angleVector), Mathf.Sin(angleVector));
+        _angleEvent.Invoke(angle, targetAngle);
     }
 }
