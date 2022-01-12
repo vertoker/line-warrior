@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class Entity
@@ -8,8 +9,16 @@ public class Entity
     private IAnimation _animation;
     private IAttack _attack;
     private Death _death;
+
     private int _health, _maxHealth;
     private GameObject _obj;
+    private UnityEvent<float> _healthProgressEvent = new UnityEvent<float>();
+
+    public event UnityAction<float> HealthProgress
+    {
+        add => _healthProgressEvent.AddListener(value);
+        remove => _healthProgressEvent.RemoveListener(value);
+    }
 
     public GameObject Obj
     {
