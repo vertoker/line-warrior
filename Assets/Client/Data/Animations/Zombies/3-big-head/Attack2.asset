@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d682a3c188997184eb47cd3258ecab29, type: 3}
+  m_Name: Attack2
+  m_EditorClassIdentifier: 
+  _sprites:
+  - {fileID: 21300000, guid: a646cca66b4e1634e8f09c3f9474be5f, type: 3}
+  - {fileID: 21300000, guid: 97dfde6c3a564ed4487b556ca260c0f1, type: 3}
+  - {fileID: 21300000, guid: c91f287b8ba581c4d95e3caa93d53e3a, type: 3}
+  - {fileID: 21300000, guid: f42ba1e0ce8ff924aa22efbfde390f10, type: 3}
+  - {fileID: 21300000, guid: 96ed0f0991dee70418ed74e6d4a9feb5, type: 3}
+  - {fileID: 21300000, guid: 0ccc04215c50e284ebe690107e7e2b86, type: 3}
+  - {fileID: 21300000, guid: f805570571554dd48ace23ecd1856832, type: 3}
+  - {fileID: 21300000, guid: 045e5a0ccd9e701478313dc459ef0e23, type: 3}
+  _frameLength: 3

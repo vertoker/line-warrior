@@ -111,13 +111,27 @@ public class StandardZombiesCreator : IEnemyCreator
 [System.Serializable]
 public class BigZombiesCreator : IEnemyCreator
 {
-    [SerializeField] private Animation tier3_BigHands, tier3_BigHead;
+    [System.Serializable]
+    private class AnimationCollection
+    {
+        [SerializeField] private Animation _attack1, _attack2, _attack3, _walk, _death;
 
-    private Dictionary<EnemyType, Animation> _converter;
+        public Animation Walk { get { return _walk; } }
+        public Animation Death { get { return _death; } }
+        public Animation Attack1 { get { return _attack1; } }
+        public Animation Attack2 { get { return _attack2; } }
+        public Animation Attack3 { get { return _attack3; } }
+    }
+
+    [SerializeField] private Transform _parent;
+    [SerializeField] private GameObject tier3_instance;
+    [SerializeField] private AnimationCollection tier3_BigHands, tier3_BigHead;
+
+    private Dictionary<EnemyType, AnimationCollection> _converter;
 
     public void Init()
     {
-        _converter = new Dictionary<EnemyType, Animation>()
+        _converter = new Dictionary<EnemyType, AnimationCollection>()
         {
             { EnemyType.Tier3_BigHands, tier3_BigHands },
             { EnemyType.Tier3_BigHead, tier3_BigHead }
@@ -126,7 +140,17 @@ public class BigZombiesCreator : IEnemyCreator
 
     public Entity CreateEntity(EnemyType type, Vector3 position)
     {
-        return null;
+        GameObject enemy = Object.Instantiate(tier3_instance, _parent);
+        enemy.transform.position = position;
+        IMovement movementEnemy = new MovementToTarget(enemy.transform, EntityScheduler.Player.transform);
+        AnimationCollection anims = _converter[type];
+
+        IAttack attackEnemy = new BigZombieAttack(enemy.transform, enemy.transform.GetChild(0));
+        IAnimation animationEnemy = new BigZombieAnimation(enemy.transform, anims.Attack1, anims.Attack2, anims.Attack3, anims.Walk, anims.Death, attackEnemy);
+        Death deathEnemy = EnemySpawner.EnemyDeath;//Поменять
+        HealthTransfer transfer = enemy.GetComponent<HealthTransfer>();
+        Entity playerEntity = new Entity(250, movementEnemy, animationEnemy, attackEnemy, deathEnemy, transfer, enemy);
+        return playerEntity;
     }
 }
 /// <summary>

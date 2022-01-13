@@ -649,8 +649,20 @@ MonoBehaviour:
       _attack: {fileID: 11400000, guid: ccec8ad55b47029448eda74e6ae47cda, type: 2}
       _death: {fileID: 11400000, guid: 01347299a2a371346a0069a613949569, type: 2}
   _bigZombies:
-    tier3_BigHands: {fileID: 0}
-    tier3_BigHead: {fileID: 0}
+    _parent: {fileID: 580773096}
+    tier3_instance: {fileID: 7670607465698307256, guid: 555465287af849d43ad36261073aa084, type: 3}
+    tier3_BigHands:
+      _attack1: {fileID: 11400000, guid: b85c1fd0f6aa30440a94211a3f090d0f, type: 2}
+      _attack2: {fileID: 11400000, guid: dc7d0931fb5689a4b9972524892d1c4a, type: 2}
+      _attack3: {fileID: 11400000, guid: 8fdcc1c16c23e9e4ca3bdf074e3c4e6c, type: 2}
+      _walk: {fileID: 11400000, guid: d984cb7e42c402d469b7fc0c68063928, type: 2}
+      _death: {fileID: 11400000, guid: e55148d436b156e4ba998fc857c02d5b, type: 2}
+    tier3_BigHead:
+      _attack1: {fileID: 11400000, guid: d995e461773ddbd489bc991bc5c6eecf, type: 2}
+      _attack2: {fileID: 11400000, guid: 39d20091e9392354c8f5194a1785a2b2, type: 2}
+      _attack3: {fileID: 11400000, guid: fa61f2e761e61bf4e9d892cdd9d5b9ae, type: 2}
+      _walk: {fileID: 11400000, guid: b21bbf95fa8bb7c4aaa2430bec137078, type: 2}
+      _death: {fileID: 11400000, guid: 962dd9c64dbf8f34bb6dfeb4310f616f, type: 2}
   _smallBossZombies:
     tier4_Boss1: {fileID: 0}
     tier4_Boss2: {fileID: 0}
